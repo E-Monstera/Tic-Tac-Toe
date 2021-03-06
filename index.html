@@ -10,19 +10,63 @@
 </head>
 
 <body>
-<button id="reset">Reset</button>
+    <h1>Tic-Tac-Toe</h1>
+    <hr>
+
+    <div id="playerHolder">
+        <div id="player1Holder">
+            <h2>Player 1</h2>
+            <form>
+                <label for="name1">Name (Optional): </label>
+                <input type="text" id="name1" name="name1" value="Player 1" placeholder="Player 1">
+                <br>
+                <p>Choose your weapon</p>
+                <label>
+                    <input type="radio" id="x" name="xo" value="x">
+                    <img id="ximg" src="images/xIcon.png" alt="x">
+                </label>
+                <label>
+                    <input type="radio" id="o" name="xo" value="o">
+                    <img id="oimg" src="images/oIcon.png" alt="o">
+                </label>
+            </form>
+        </div>
+
+        <div id="player2Holder">
+            <h2>Player 2</h2>
+            <form>
+                <label for="name2">Name (Optional): </label>
+                <input type="text" id="name2" name="name2" value="Player 2" placeholder="Player 2">
+                <!-- <label>
+            <input type="radio" name="X1" value = "x" checked>
+            <img id="ximg" src="images/xIcon.png">
+        </label>
+        <label>
+            <input type="radio" name="X1" value = "x" checked>
+            <img id="ximg" src="images/oIcon.png"> -->
+                <!-- </label> -->
+            </form>
+        </div>
+    </div>
+<div class="interactButtons">
+    <button id="setter" class="midButtons">Set Options</button>
+    <button id="reset" class="midButtons">Reset</button>
+</div>
+
+
+
     <!-- Layout for the gameboard -->
     <div id="game-holder">
         <div id="gameBoard">
-            <button id="b1 1" class="tile"></button>
-            <button id="b2 2" class="tile"></button>
-            <button id="b3 3" class="tile"></button>
-            <button id="b4 4" class="tile"></button>
-            <button id="b5 5" class="tile"></button>
-            <button id="b6 6" class="tile"></button>
-            <button id="b7 7" class="tile"></button>
-            <button id="b8 8" class="tile"></button>
-            <button id="b9 9" class="tile"></button>
+            <button id="b1" class="tile"></button>
+            <button id="b2" class="tile"></button>
+            <button id="b3" class="tile"></button>
+            <button id="b4" class="tile"></button>
+            <button id="b5" class="tile"></button>
+            <button id="b6" class="tile"></button>
+            <button id="b7" class="tile"></button>
+            <button id="b8" class="tile"></button>
+            <button id="b9" class="tile"></button>
         </div>
 
     </div>
@@ -32,4 +76,5 @@
 
 </body>
 <script src="script.js"></script>
+
 </html>

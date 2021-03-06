@@ -1,7 +1,14 @@
 
+//Form selectors
+const name1 = document.querySelector('#name1');
+const name2 = document.querySelector('#name2');
+// const option = document.querySelector('#xo');        Not working
+
+
 // Setting up the buttons
 const buttons = document.querySelectorAll('.tile');
 const resetBtn = document.querySelector('#reset');
+const setterBtn = document.querySelector('#setter');
 
 buttons.forEach((btn) => {
     btn.addEventListener('click', function (e){
@@ -15,6 +22,17 @@ resetBtn.addEventListener('click', () => {
     game.restart();
 });
 
+setterBtn.addEventListener('click', () => {
+    let pieceValue;
+    let radioButtons = document.getElementsByName('xo');
+    radioButtons.forEach((radio) => {
+        if (radio.checked){
+            pieceValue=radio.value;
+        }
+    });
+    game.setAttributes(name1.value, name2.value, pieceValue);
+
+});
 // End of buttons
 
 
@@ -28,7 +46,7 @@ const playerFactory = (name, piece) =>{
 
 //module pattern for gameboard
 const gameboard = (() => {
-    let array = ['', '', 'x', '', '', '', 'o', '', ''];
+    let array = ['', '', '', '', '', '', '', '', ''];
     const getBoard = () => array;
     const updateBoard = (index, piece) => {
         array[index] = piece;
@@ -46,12 +64,22 @@ const game = (() => {
     let player1;
     let player2;
 
+    const setAttributes = (name1, name2, pieceOption) => {
+        player1 = playerFactory(name1, pieceOption);
+        if (pieceOption == 'x'){
+            player2 = playerFactory(name2, 'o');
+        }
+        else{
+            player2 = playerFactory(name2, 'x');
+        }
+    };
+
     const _displayWinner = (str) => {
         if (str == player1.piece){
-            alert("Player 1 Wins!");
+            alert(`${player1.name} wins!`);
         }
         else if (str == player2.piece){
-            alert("Player 2 Wins!");
+            alert(`${player2.name} wins!`);
         }
         
     };
@@ -76,12 +104,12 @@ const game = (() => {
         else if ((arr[1] == arr[4]) && (arr[4] == arr[7])){
             _displayWinner(arr[1]);
         }
-        else if ((arr[2] == arr[5]) && (arr[5] == arr[7])){
+        else if ((arr[2] == arr[5]) && (arr[5] == arr[8])){
             _displayWinner(arr[2]);
         }
 
         //Checks diagonally
-        else if ((arr[0] == arr[4]) && (arr[4] == arr[7])){
+        else if ((arr[0] == arr[4]) && (arr[4] == arr[8])){
             _displayWinner(arr[0]);
         }
         else if ((arr[2] == arr[4]) && (arr[4] == arr[6])){
@@ -106,10 +134,9 @@ const game = (() => {
 
     //Initially loads the board and sets the player stats, will need to be adjusted later to include names and choices for x or o.
     const play = () => {
-        player1 = playerFactory('player1', 'x');
-        player2 = playerFactory('player2', 'o');
+        player1 = playerFactory('Player 1', 'x');
+        player2 = playerFactory('Player 2', 'o');
         _display();
-
     };
 
     const event = (index) => {
@@ -159,12 +186,12 @@ const game = (() => {
             });
     };
 
-    return {play, event, restart};
+    return {play, event, restart, setAttributes};
 })();
 
 game.play();                                           
 
-
+window.onload = game.play();
 
 
 

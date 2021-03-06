@@ -1,32 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Courgette', cursive;
 }
-
-#game-holder{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 200px;
+ 
+html{
+    background-color: rgb(155, 204, 204);
 }
-
-
-#gameBoard{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    /* grid-area: [one two three], [four five six], [seven eight nine]; */
-    height: 400px;
-    width: 400px;
-}
-
-#reset{
-    position: absolute;
-    height: 80px;
-    width: 80px;
-}
-
 
 button {
     background-color: white;
@@ -36,6 +19,92 @@ button {
 button:hover{
     background-color: teal;
 }
+
+h1 {
+    font-size: 60px;
+    text-align: center;
+}
+
+
+/* Events */
+/* #reset{
+    position: absolute;
+    height: 50px;
+    width: 80px;
+    margin: 0 48%;
+} */
+
+.midButtons{
+    height: 50px;
+    width: 100px;
+    margin: 0 40px; 
+    padding: 0;
+    border-style: none;
+    font-size: 16px;
+}
+
+.interactButtons{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+ [type=radio] + img {
+    cursor: pointer;
+    margin: 20px;
+    margin-left: 80px;
+  }
+
+  [type=radio]:checked + img {
+    outline: 2px solid #000;
+  }
+
+
+/* Design for player options */
+#playerHolder{
+    display: flex;
+    margin: 0 150px;
+    justify-content: space-around;
+    margin-top: 40px;
+}
+
+#playerHolder h2{
+    margin-bottom: 20px;
+}
+
+#playerHolder p{
+    text-align: center;
+    padding-left: 30px;
+    margin-top: 20px;
+}
+
+
+/* The gameboard */
+
+#game-holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+
+#gameBoard{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 400px;
+    width: 400px;
+}
+
+
 
 /* These remove the borders on each side of the grid to create the traditional 'tic-tac-toe' layout */
 #b3, #b6, #b9{
@@ -63,34 +132,3 @@ button:hover{
     background-image: URL("images/O.png");
 }
 
-
-
-
-
-/* #b1{
-    grid-area: one;
-}
-#b2{
-    grid-area: two;
-}
-#b3{
-    grid-area: three;
-}
-#b4{
-    grid-area: four;
-}
-#b5{
-    grid-area: five;
-}
-#b6{
-    grid-area: six;
-}
-#b7{
-    grid-area: seven;
-}
-#b8{
-    grid-area: eight;
-}
-#b9{
-    grid-area: nine;
-} */
