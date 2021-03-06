@@ -1,0 +1,82 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#game-holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+}
+
+
+#gameBoard{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-area: [one two three], [four five six], [seven eight nine];
+    height: 400px;
+    width: 400px;
+}
+
+
+
+
+button {
+    height: fill;
+    background-color: white;
+    border: solid;
+}
+
+button:hover{
+    background-color: teal;
+}
+
+#b3, #b6, #b9{
+    border-right-style: none;
+}
+
+#b1, #b2, #b3{
+    border-top-style: none;
+}
+
+#b1, #b4, #b7{
+    border-left-style: none;
+}
+
+#b7, #b8, #b9{
+    border-bottom-style: none;
+}
+
+
+
+
+/* #b1{
+    grid-area: one;
+}
+#b2{
+    grid-area: two;
+}
+#b3{
+    grid-area: three;
+}
+#b4{
+    grid-area: four;
+}
+#b5{
+    grid-area: five;
+}
+#b6{
+    grid-area: six;
+}
+#b7{
+    grid-area: seven;
+}
+#b8{
+    grid-area: eight;
+}
+#b9{
+    grid-area: nine;
+} */
