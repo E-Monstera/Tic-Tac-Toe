@@ -16,16 +16,19 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    grid-area: [one two three], [four five six], [seven eight nine];
+    /* grid-area: [one two three], [four five six], [seven eight nine]; */
     height: 400px;
     width: 400px;
 }
 
-
+#reset{
+    position: absolute;
+    height: 80px;
+    width: 80px;
+}
 
 
 button {
-    height: fill;
     background-color: white;
     border: solid;
 }
@@ -34,6 +37,7 @@ button:hover{
     background-color: teal;
 }
 
+/* These remove the borders on each side of the grid to create the traditional 'tic-tac-toe' layout */
 #b3, #b6, #b9{
     border-right-style: none;
 }
@@ -49,6 +53,16 @@ button:hover{
 #b7, #b8, #b9{
     border-bottom-style: none;
 }
+
+/* Classes for X or O selection */
+.Xicon{
+    background-image: URL("images/X.png");
+}
+
+.Oicon{
+    background-image: URL("images/O.png");
+}
+
 
 
 
