@@ -30,7 +30,9 @@ const playerFactory = (name, piece) =>{
 const gameboard = (() => {
     let array = ['', '', 'x', '', '', '', 'o', '', ''];
     const getBoard = () => array;
-    const updateBoard = (index, piece) => {array[index] = piece;};
+    const updateBoard = (index, piece) => {
+        array[index] = piece;
+    };
     const reset = () => {array = ['', '', '', '', '', '', '', '', ''];};
     return {getBoard, updateBoard, reset};
 })();
@@ -44,7 +46,61 @@ const game = (() => {
     let player1;
     let player2;
 
+    const _displayWinner = (str) => {
+        if (str == player1.piece){
+            alert("Player 1 Wins!");
+        }
+        else if (str == player2.piece){
+            alert("Player 2 Wins!");
+        }
+        
+    };
+
     const _winner = () =>{
+        let arr = gameboard.getBoard();
+        // Checks across
+        if ((arr[0] == arr[1]) && (arr[1] == arr[2])){
+            _displayWinner(arr[0]);
+        }
+        else if ((arr[3] == arr[4]) && (arr[4] == arr[5])){
+            _displayWinner(arr[3]);
+        }
+        else if ((arr[6] == arr[7]) && (arr[7] == arr[8])){
+            _displayWinner(arr[8]);
+        }
+
+        // Checks vertically
+        else if ((arr[0] == arr[3]) && (arr[3] == arr[6])){
+            _displayWinner(arr[0]);
+        }
+        else if ((arr[1] == arr[4]) && (arr[4] == arr[7])){
+            _displayWinner(arr[1]);
+        }
+        else if ((arr[2] == arr[5]) && (arr[5] == arr[7])){
+            _displayWinner(arr[2]);
+        }
+
+        //Checks diagonally
+        else if ((arr[0] == arr[4]) && (arr[4] == arr[7])){
+            _displayWinner(arr[0]);
+        }
+        else if ((arr[2] == arr[4]) && (arr[4] == arr[6])){
+            _displayWinner(arr[2]);
+        }
+        else{
+            let count = 0;
+            arr.forEach(element =>
+            { 
+                if (element == ''){
+                    count ++
+                }
+            });
+            if (count === 0){
+                alert("It's a tie");
+            }
+        }
+        console.log("not yet");
+        console.log(arr);
         //Checks to see if there was a winner
     };
 
@@ -57,16 +113,22 @@ const game = (() => {
     };
 
     const event = (index) => {
-        if (turn === 1){        //This means it's player1's turn
-            //Need to add player1.piece to the board
-            gameboard.updateBoard(index, player1.piece);
-            turn ++;
+        let array = gameboard.getBoard();
+        if (array[index] === ''){
+            if (turn === 1){        
+                gameboard.updateBoard(index, player1.piece);
+                turn ++;
+            }
+            else{
+                gameboard.updateBoard(index, player2.piece);
+                turn --;
+            }
+            _display();
+            _winner();
         }
         else{
-            gameboard.updateBoard(index, player2.piece);
-            turn --;
+            console.log('already played there. turn = ' + turn);
         }
-        _display();
         //Triggered by an event handler to add X or O to a board (depending on current player)
         //Also needs to call gameboard.updateBoard(btnPressed, currentPiece)
         //Then runs the winner function to see if there's a winner
