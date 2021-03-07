@@ -26,14 +26,7 @@ h1 {
 }
 
 
-/* Events */
-/* #reset{
-    position: absolute;
-    height: 50px;
-    width: 80px;
-    margin: 0 48%;
-} */
-
+/* Reset and set customization button */
 .midButtons{
     height: 50px;
     width: 100px;
@@ -49,6 +42,7 @@ h1 {
     align-self: center;
 }
 
+/* Customizing the radio button to appear as an image only */
 [type=radio] {
     position: absolute;
     opacity: 0;

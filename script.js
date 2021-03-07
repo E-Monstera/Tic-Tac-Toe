@@ -2,7 +2,6 @@
 //Form selectors
 const name1 = document.querySelector('#name1');
 const name2 = document.querySelector('#name2');
-// const option = document.querySelector('#xo');        Not working
 
 
 // Setting up the buttons
@@ -10,6 +9,7 @@ const buttons = document.querySelectorAll('.tile');
 const resetBtn = document.querySelector('#reset');
 const setterBtn = document.querySelector('#setter');
 
+// Event listener for each of the buttons. It removes the 'b' in the ID, leaving us with the number of the target button. This allows the value to be added directly to the corresponding array index.
 buttons.forEach((btn) => {
     btn.addEventListener('click', function (e){
         let target = e.target.id;
@@ -18,10 +18,12 @@ buttons.forEach((btn) => {
     })
 });
 
+// For clearing the game board
 resetBtn.addEventListener('click', () => {
     game.restart();
 });
 
+// Even listener for the customization button
 setterBtn.addEventListener('click', () => {
     let pieceValue;
     let radioButtons = document.getElementsByName('xo');
@@ -47,11 +49,11 @@ const playerFactory = (name, piece) =>{
 //module pattern for gameboard
 const gameboard = (() => {
     let array = ['', '', '', '', '', '', '', '', ''];
-    const getBoard = () => array;
-    const updateBoard = (index, piece) => {
+    const getBoard = () => array;                           //Returns the array to load the gameboard
+    const updateBoard = (index, piece) => {                 //Updates the array when a player makes a move
         array[index] = piece;
     };
-    const reset = () => {array = ['', '', '', '', '', '', '', '', ''];};
+    const reset = () => {array = ['', '', '', '', '', '', '', '', ''];};    //Resets the array
     return {getBoard, updateBoard, reset};
 })();
 
@@ -61,10 +63,10 @@ const gameboard = (() => {
 const game = (() => {
 
     let turn = 1;           //This holds the players turn and is updated each time someone plays
-    let player1;
+    let player1;            //Variables to hold the player objects
     let player2;
 
-    const setAttributes = (name1, name2, pieceOption) => {
+    const setAttributes = (name1, name2, pieceOption) => {      //Sets the player name and chosen game piece when the 'set attributes' button is pressed
         player1 = playerFactory(name1, pieceOption);
         if (pieceOption == 'x'){
             player2 = playerFactory(name2, 'o');
@@ -74,7 +76,7 @@ const game = (() => {
         }
     };
 
-    const _displayWinner = (str) => {
+    const _displayWinner = (str) => {               //Displays the appropriate winner
         if (str == player1.piece){
             alert(`${player1.name} wins!`);
         }
@@ -84,7 +86,7 @@ const game = (() => {
         
     };
 
-    const _winner = () =>{
+    const _winner = () =>{                      //Private function that checks the array to see if there's a winner
         let arr = gameboard.getBoard();
         // Checks across
         if ((arr[0] == arr[1]) && (arr[1] == arr[2])){
@@ -139,7 +141,9 @@ const game = (() => {
         _display();
     };
 
-    const event = (index) => {
+    //This function is used anytime a player clicks on the game board. It first checks to make sure there isn't already a 
+    //'piece' on that tile, then updates the board and the array according to the player 
+    const event = (index) => {              
         let array = gameboard.getBoard();
         if (array[index] === ''){
             if (turn === 1){        
@@ -150,21 +154,14 @@ const game = (() => {
                 gameboard.updateBoard(index, player2.piece);
                 turn --;
             }
-            _display();
-            _winner();
+            _display();             //Displays the updated board
+            _winner();              //Checks for a winner/end of game
         }
-        else{
-            console.log('already played there. turn = ' + turn);
-        }
-        //Triggered by an event handler to add X or O to a board (depending on current player)
-        //Also needs to call gameboard.updateBoard(btnPressed, currentPiece)
-        //Then runs the winner function to see if there's a winner
     };
 
-    const restart = () => {
+    const restart = () => {         //Resets the board, triggered by the 'reset' button
         gameboard.reset();
         _display();
-        //Resets the board. Add a button to trigger this 
     };
 
     const _display = () => {
@@ -189,27 +186,11 @@ const game = (() => {
     return {play, event, restart, setAttributes};
 })();
 
+//Loads the board with default values
 game.play();                                           
 
-window.onload = game.play();
 
 
 
 
 
-
-
-
-
-// Keeping these as notes - This was an experiment on using the modules. 
-// const gameboard = (() => {
-//     array = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
-//     const getBoard = () => array;
-//     const updateBoard = (index, piece) => {array[index] = piece;};
-//     const attempt = () => 'hello';
-//     return {getBoard, updateBoard, attempt};
-
-// })();
-
-// console.table(gameboard.getBoard());
-// console.log(gameboard.attempt());
